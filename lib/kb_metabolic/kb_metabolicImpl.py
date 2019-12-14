@@ -6,7 +6,10 @@ import json
 
 from installed_clients.KBaseReportClient import KBaseReport
 from kb_metabolic.utils.misc_utils import load_fastas
+from kb_metabolic.utils.misc_utils import rename_input_file_suffixes
 from kb_metabolic.utils.misc_utils import create_html_report
+
+from kb_metabolic.utils.MetabolicUtil import MetabolicUtil
 
 #END_HEADER
 
@@ -85,9 +88,12 @@ class kb_metabolic:
         fasta_paths = load_fastas(self.config, self.shared_folder, ref)
         print(fasta_paths)
 
+        logging.info("Rename Genome Suffixes\n")
+        rename_input_file_suffixes()
+
         logging.info("Run METABOLIC\n")
         metabolic = MetabolicUtil(self.config, self.callback_url, workspace_id, self.cpus)
-        results = metabolic.run_metabolic_without_reads(fasta_paths)
+        results = metabolic.run_metabolic_without_reads()
         logging.info(results)
         output = create_html_report(self.callback_url, self.shared_folder, params['workspace_name'])
 

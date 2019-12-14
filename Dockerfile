@@ -54,6 +54,11 @@ RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.27/diamond-l
 # need to fix so that the steps inside ./run_to_setup.sh are inside the entrypoint.sh file
 RUN git clone https://github.com/AnantharamanLab/METABOLIC.git && cd METABOLIC && chmod +x ./run_to_setup.sh && ./run_to_setup.sh
 
+# put in proper place
+RUN pip install pandas
+
+RUN cpan -i Parallel::ForkManager;
+
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
 RUN chmod -R a+rw /kb/module

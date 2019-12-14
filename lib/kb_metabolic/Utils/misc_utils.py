@@ -63,6 +63,16 @@ def load_fastas(config, scratch, upa):
 
     return fasta_paths
 
+
+def rename_input_file_suffixes(self):
+    logging.info("Rename Genome File Suffixes\n")
+    d = self.shared_folder
+    for path in os.listdir(d):
+        full_path = os.path.join(d, path)
+        if full_path.endswith(".fa") or full_path.endswith(".fna"):
+            new_filename = os.path.join(d, "_".join(full_path.split(".")[0:-1]) + ".fasta")
+            os.rename(full_path, new_filename)
+
 def create_html_report(callback_url, scratch, workspace_name):
     '''
     '''

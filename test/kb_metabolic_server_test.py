@@ -29,7 +29,7 @@ class kb_metabolicTest(unittest.TestCase):
         # WARNING: don't call any logging methods on the context object,
         # it'll result in a NoneType error
         cls.ctx = MethodContext(None)
-        cls.ctx.update({'token': cls.token,
+        cls.ctx.update({'token': token,
                         'user_id': user_id,
                         'provenance': [
                             {'service': 'kb_metabolic',
