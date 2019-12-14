@@ -48,7 +48,7 @@ RUN echo "install.packages(\"ggalluvial\", repos=\"https://cran.rstudio.com\")" 
 RUN echo "install.packages(\"reshape2\", repos=\"https://cran.rstudio.com\")" | R --no-save
 RUN echo "install.packages(\"ggraph\", repos=\"https://cran.rstudio.com\")" | R --no-save
 
-# unclear why diamond is needed, but it is among the first steps run with the test data
+# unclear why diamond is needed, but it is among the first steps run with the test data and throws a non-critical error if not installed
 RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.27/diamond-linux64.tar.gz && tar xzf diamond-linux64.tar.gz && mv diamond /usr/local/bin/ && rm diamond-linux64.tar.gz
 
 # need to fix so that the steps inside ./run_to_setup.sh are inside the entrypoint.sh file

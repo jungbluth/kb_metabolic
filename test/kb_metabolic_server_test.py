@@ -8,12 +8,14 @@ from kb_metabolic.kb_metabolicImpl import kb_metabolic
 from kb_metabolic.kb_metabolicServer import MethodContext
 from kb_metabolic.authclient import KBaseAuth as _KBaseAuth
 
+from installed_clients.WorkspaceClient import Workspace
+
 
 class kb_metabolicTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.token = os.environ.get('KB_AUTH_TOKEN', None)
+        token = os.environ.get('KB_AUTH_TOKEN', None)
         config_file = os.environ.get('KB_DEPLOYMENT_CONFIG', None)
         cls.cfg = {}
         config = ConfigParser()
@@ -23,7 +25,7 @@ class kb_metabolicTest(unittest.TestCase):
         # Getting username from Auth profile for token
         authServiceUrl = cls.cfg['auth-service-url']
         auth_client = _KBaseAuth(authServiceUrl)
-        user_id = auth_client.get_user(cls.token)
+        user_id = auth_client.get_user(token)
         # WARNING: don't call any logging methods on the context object,
         # it'll result in a NoneType error
         cls.ctx = MethodContext(None)
@@ -44,6 +46,11 @@ class kb_metabolicTest(unittest.TestCase):
         cls.wsName = "test_ContigFilter_" + str(suffix)
         ret = cls.wsClient.create_workspace({'workspace': cls.wsName})  # noqa
 
+    @classmethod
+    def tearDownClass(cls):
+        if hasattr(cls, 'wsName'):
+            cls.wsClient.delete_workspace({'workspace': cls.wsName})
+            print('Test workspace was deleted')
 
     # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     def test_kb_metabolic(self):
