@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y wget tzdata git r-base gcc automake lib
 
 RUN wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz && tar -xvzf libiconv-1.16.tar.gz && cd libiconv-1.16 && ./configure --prefix=/usr/local/libiconv && make && make install
 
+RUN pip install pandas
+
 RUN cpan -r
 
 RUN cpan -i Data::Dumper;
@@ -24,6 +26,7 @@ RUN cpan -i Bio::SeqIO;
 RUN cpan -i Bio::Perl;
 RUN cpan -i Bio::Tools::CodonTable;
 RUN cpan -i Carp;
+RUN cpan -i Parallel::ForkManager;
 
 RUN wget http://eddylab.org/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz && tar -xvzf hmmer-3.1b2-linux-intel-x86_64.tar.gz && cd hmmer-3.1b2-linux-intel-x86_64 && ./configure && make && make install && cd ../ && rm -rf hmmer-3.1b2-*
 
@@ -53,11 +56,6 @@ RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.27/diamond-l
 
 # need to fix so that the steps inside ./run_to_setup.sh are inside the entrypoint.sh file
 RUN git clone https://github.com/AnantharamanLab/METABOLIC.git && cd METABOLIC && chmod +x ./run_to_setup.sh && ./run_to_setup.sh
-
-# put in proper place
-RUN pip install pandas
-
-RUN cpan -i Parallel::ForkManager;
 
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
