@@ -17,14 +17,14 @@ elif [ "${1}" = "async" ] ; then
   sh ./scripts/run_async.sh
 elif [ "${1}" = "init" ] ; then
   echo "Initialize module"
-  mkdir -p /data/
+  cd /kb/module/data
   git clone https://github.com/AnantharamanLab/METABOLIC
   cd METABOLIC
   chmod +x ./run_to_setup.sh
   echo "Setting up METABOLIC databases"
   ./run_to_setup.sh
-  if [ -f "/data/METABOLIC/pepunit.lib" ] ; then
-    touch /data/__READY__
+  if [ -f "/kb/module/data/METABOLIC/pepunit.lib" ] ; then
+    touch /kb/module/data/__READY__
   else
     echo "Init failed"
   fi

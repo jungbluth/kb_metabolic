@@ -11,14 +11,10 @@ WORKDIR /kb/module/bin
 # To install all the dependencies
 RUN apt-get update && apt-get install -y wget tzdata git r-base gcc automake libtool libc6-dev libssl-dev curl libcurl4-openssl-dev
 
-# RUN apt-get install -y libxml2 libxml2-dev libxml-libxml-perl
-
-# RUN wget http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.16.tar.gz && tar -xvzf libiconv-1.16.tar.gz && cd libiconv-1.16 && ./configure --prefix=/usr/local/libiconv && make && make install
-
 # install perl and packages
 RUN conda install -c bioconda perl-bioperl
 
-RUN cpan -i App::cpanminus && cpanm -i Excel::Writer::XLSX && cpanm -i Array::Split
+RUN cpan -i App::cpanminus && cpanm -i Excel::Writer::XLSX && cpanm -i Array::Split && cpanm -i Parallel::ForkManager
 
 # install R packages
 RUN echo "install.packages(\"tidyverse\", repos=\"http://cran.us.r-project.org\")" | R --no-save && \
@@ -51,11 +47,7 @@ RUN wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.l
 # unclear why diamond is needed, but it is among the first steps run with the test data and throws a non-critical error if not installed
 RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.27/diamond-linux64.tar.gz && tar xzf diamond-linux64.tar.gz && mv diamond /usr/local/bin/ && rm diamond-linux64.tar.gz
 
-# need to fix so that the steps inside ./run_to_setup.sh are inside the entrypoint.sh file
 RUN git clone https://github.com/AnantharamanLab/METABOLIC.git && cd METABOLIC && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-C.pl && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-G.pl
-
-# move me
-RUN cpanm -i Parallel::ForkManager
 
 COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
