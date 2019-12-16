@@ -88,8 +88,8 @@ class kb_metabolic:
         fasta_paths = load_fastas(self.config, self.shared_folder, ref)
         print(fasta_paths)
 
-        logging.info("Rename Genome Suffixes\n")
-        rename_input_file_suffixes()
+        logging.info("Rename Genome File Suffixes\n")
+        rename_input_file_suffixes(self.shared_folder)
 
         logging.info("Run METABOLIC\n")
         metabolic = MetabolicUtil(self.config, self.callback_url, workspace_id, self.cpus)

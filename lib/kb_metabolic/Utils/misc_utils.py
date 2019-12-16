@@ -64,9 +64,8 @@ def load_fastas(config, scratch, upa):
     return fasta_paths
 
 
-def rename_input_file_suffixes(self):
-    logging.info("Rename Genome File Suffixes\n")
-    d = self.shared_folder
+def rename_input_file_suffixes(scratch):
+    d = scratch
     for path in os.listdir(d):
         full_path = os.path.join(d, path)
         if full_path.endswith(".fa") or full_path.endswith(".fna"):

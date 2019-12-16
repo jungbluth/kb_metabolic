@@ -18,13 +18,6 @@ class MetabolicUtil():
                             level=logging.INFO)
 
 
-    def rename_input_file_suffixes(self):
-        logging.info("Rename Genome File Suffixes\n")
-        for filename in os.listdir(self.shared_folder):
-            if filename.endswith(".fa", ".fna"):
-                new_filename = "_".join(filename.split(".")[0:-1]) + ".fasta"
-                os.rename(filename, new_filename)
-
     def run_metabolic_without_reads(self):
         '''
         Run the METABOLIC-G workflow (not using raw reads)
