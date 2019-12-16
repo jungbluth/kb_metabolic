@@ -12,3 +12,6 @@ module-version:
 
 owners:
     [seanjungbluth,psdehal]
+
+data-version:
+    1.0

@@ -52,7 +52,7 @@ RUN wget https://github.com/hyattpd/Prodigal/releases/download/v2.6.3/prodigal.l
 RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.27/diamond-linux64.tar.gz && tar xzf diamond-linux64.tar.gz && mv diamond /usr/local/bin/ && rm diamond-linux64.tar.gz
 
 # need to fix so that the steps inside ./run_to_setup.sh are inside the entrypoint.sh file
-RUN git clone https://github.com/AnantharamanLab/METABOLIC.git && cd METABOLIC && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-C.pl && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-G.pl && chmod +x ./run_to_setup.sh && ./run_to_setup.sh
+RUN git clone https://github.com/AnantharamanLab/METABOLIC.git && cd METABOLIC && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-C.pl && sed -i 's/.usr.bin.perl/\/usr\/bin\/env perl/' METABOLIC-G.pl
 
 # move me
 RUN cpanm -i Parallel::ForkManager
