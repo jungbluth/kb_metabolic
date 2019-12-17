@@ -27,7 +27,7 @@ class MetabolicUtil():
                               "-in-gn", self.shared_folder,
                                "-t", str(self.cpus),
                                "-o", out_dir,
-                               "-m", "/kb/module/data/METABOLIC"])
+                               "-m", "/data/METABOLIC"])
         logging.info("Starting Command:\n" + metabolic_cmd)
         output = subprocess.check_output(metabolic_cmd, shell=True).decode('utf-8')
         logging.info(output)
@@ -45,7 +45,7 @@ class MetabolicUtil():
                               "-in-gn", self.shared_folder,
                                "-t", str(self.cpus),
                                "-o", out_dir,
-                               "-m", "/kb/module/data/METABOLIC",
+                               "-m", "/data/METABOLIC",
                                "-r", omic_reads_parameter_file])
         logging.info("Starting Command:\n" + metabolic_cmd)
         output = subprocess.check_output(metabolic_cmd, shell=True).decode('utf-8')
