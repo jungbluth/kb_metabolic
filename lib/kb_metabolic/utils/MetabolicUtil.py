@@ -80,7 +80,7 @@ class MetabolicUtil():
         metabolic_cmd = " ".join(["perl", "/kb/module/bin/METABOLIC/METABOLIC-G.pl",
                                   "-in-gn", self.shared_folder,
                                   "-t", str(self.cpus),
-                                  "-m-cutoff", params['kegg_module_cutoff'],
+                                  "-m-cutoff", str(params['kegg_module_cutoff']),
                                   "-p", params['prodigal_method'],
                                   "-o", out_dir,
                                   "-m", "/data/METABOLIC"])
