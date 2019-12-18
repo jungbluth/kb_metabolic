@@ -2,9 +2,7 @@
 #BEGIN_HEADER
 import logging
 import os
-import json
 
-from installed_clients.KBaseReportClient import KBaseReport
 from kb_metabolic.utils.misc_utils import load_fastas
 from kb_metabolic.utils.misc_utils import rename_input_file_suffixes
 from kb_metabolic.utils.misc_utils import create_html_report
@@ -38,7 +36,6 @@ class kb_metabolic:
 
     # config contains contents of config file in a hash or None if it couldn't
     # be found
-
 
     # def __init__(self, config):
     #     #BEGIN_CONSTRUCTOR
