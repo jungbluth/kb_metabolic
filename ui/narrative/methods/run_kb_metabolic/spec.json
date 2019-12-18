@@ -51,15 +51,15 @@
                 "options": [
                     {
                         "value": "meta",
-                        "display": "Meta",
+                        "display": "meta",
                         "id": "meta",
-                        "ui_name": "Meta"
+                        "ui_name": "meta"
                     },
                     {
                         "value": "single",
-                        "display": "Single",
+                        "display": "single",
                         "id": "single",
-                        "ui_name": "Single"
+                        "ui_name": "single"
                     }
                 ]
             }
@@ -69,11 +69,11 @@
           "optional": true,
           "advanced": true,
           "allow_multiple": false,
-          "default_values": [ 0.75 ],
+          "default_values": [ "0.75" ],
           "field_type": "text",
           "text_options": {
-              "min_int" : 0.1,
-              "max_int" : 1.0,
+              "min_float" : 0.1,
+              "max_float" : 1.0,
               "validate_as" : "float"
             }
         }

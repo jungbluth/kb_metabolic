@@ -5,7 +5,7 @@ name     : Predict metabolic and biogeochemical functional traits using METABOLI
 subtitle : predict metabolic and biogeochemical traits
 tooltip  : predict metabolic and biogeochemical traits
 
-icon: METABOLIC_icon.png
+icon: METABOLIC_icon_red.png
 
 screenshots:
     - METABOLIC_banner.png
