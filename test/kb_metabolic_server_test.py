@@ -65,4 +65,6 @@ class kb_metabolicTest(unittest.TestCase):
         # self.assertEqual(ret[...], ...) or other unittest methods
         print("START TEST 1\n")
         ret = self.serviceImpl.run_kb_metabolic(self.ctx, {'workspace_name': self.wsName,
-                                                             'inputObjectRef': '30870/32/3'})
+                                                             'inputObjectRef': '30870/32/3',
+                                                             'kegg_module_cutoff': '0.75',
+                                                             'prodigal_method': 'meta'})

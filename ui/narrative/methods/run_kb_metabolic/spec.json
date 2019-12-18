@@ -28,6 +28,54 @@
                                    "KBaseSets.AssemblySet",
                                    "KBaseMetagenomes.BinnedContigs" ]
             }
+        },
+        {
+            "id" : "reads_list",
+            "optional" : true,
+            "advanced" : false,
+            "allow_multiple" : true,
+            "default_values" : [ "" ],
+            "field_type" : "text",
+            "text_options" : {
+              "valid_ws_types" : ["KBaseFile.PairedEndLibrary", "KBaseFile.SingleEndLibrary", "KBaseAssembly.PairedEndLibrary", "KBaseAssembly.SingleEndLibrary"]
+            }
+        },
+        {
+            "id": "prodigal_method",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ "meta" ],
+            "field_type": "dropdown",
+            "dropdown_options": {
+                "options": [
+                    {
+                        "value": "meta",
+                        "display": "Meta",
+                        "id": "meta",
+                        "ui_name": "Meta"
+                    },
+                    {
+                        "value": "single",
+                        "display": "Single",
+                        "id": "single",
+                        "ui_name": "Single"
+                    }
+                ]
+            }
+        },
+        {
+          "id": "kegg_module_cutoff",
+          "optional": true,
+          "advanced": true,
+          "allow_multiple": false,
+          "default_values": [ 0.75 ],
+          "field_type": "text",
+          "text_options": {
+              "min_int" : 0.1,
+              "max_int" : 1.0,
+              "validate_as" : "float"
+            }
         }
     ],
     "behavior": {
@@ -46,6 +94,19 @@
                     "input_parameter": "inputObjectRef",
                     "target_property": "inputObjectRef",
                     "target_type_transform":"ref"
+                },
+                {
+                    "input_parameter": "reads_list",
+                    "target_type_transform": "list<ref>",
+                    "target_property": "reads_list"
+                },
+                {
+                    "input_parameter": "prodigal_method",
+                    "target_property": "prodigal_method"
+                },
+                {
+                    "input_parameter": "kegg_module_cutoff",
+                    "target_property": "kegg_module_cutoff"
                 }
             ],
             "output_mapping": [
