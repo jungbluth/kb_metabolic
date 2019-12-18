@@ -23,7 +23,7 @@ elif [ "${1}" = "init" ] ; then
   chmod +x ./run_to_setup.sh
   echo "Setting up METABOLIC databases"
   ./run_to_setup.sh
-  #if [ -f "/data/METABOLIC/pepunit.lib" ] ; then
+  #if [ -f "/data/METABOLIC/pepunit.lib" ] ; then # need to make sure this file is present, wasn't working
   touch /data/__READY__
   #else
   #  echo "Init failed"

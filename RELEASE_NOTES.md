@@ -5,6 +5,8 @@ ToDo
 -----
 * Update documentation and inline comments
 * Add pdf files to reports
+* Fix entrypoint.sh script and __READY__ flag
+* Add flags to the program
 
 1.0.0
 -----
