@@ -5,9 +5,9 @@ import os
 import json
 
 from installed_clients.KBaseReportClient import KBaseReport
-from .utils.misc_utils import load_fastas
-from .utils.misc_utils import rename_input_file_suffixes
-from .utils.misc_utils import create_html_report
+from kb_metabolic.utils.misc_utils import load_fastas
+from kb_metabolic.utils.misc_utils import rename_input_file_suffixes
+from kb_metabolic.utils.misc_utils import create_html_report
 
 from kb_metabolic.utils.MetabolicUtil import MetabolicUtil
 
