@@ -38,6 +38,11 @@ parameters :
         long-hint  : |
             A single assembly or genome object or an assembly set or genome set.
 
+    reads_list :
+        ui-name : Reads
+        short-hint : A list of reads object (PairedEndLibrary/SingleEndLibrary) upon which METABOLIC will be run
+        long-hint  : A list of reads object (PairedEndLibrary/SingleEndLibrary) upon which METABOLIC will be run
+
     prodigal_method :
         ui-name : |
             Prodigal Gene Calling Mode
