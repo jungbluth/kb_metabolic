@@ -90,6 +90,8 @@ class kb_metabolic:
 
         logging.info("Run METABOLIC\n")
         metabolic = MetabolicUtil(self.config, self.callback_url, workspace_id, self.cpus)
+
+        print('\n\nreads_list is: {}'.format(params.get('reads_list')))
         results = metabolic.run_metabolic_without_reads(params)
         logging.info(results)
         output = create_html_report(self.callback_url, self.shared_folder, params['workspace_name'])

@@ -15,6 +15,7 @@ class MetabolicUtil():
         logging.basicConfig(format='%(created)s %(levelname)s: %(message)s',
                             level=logging.INFO)
 
+
     def stage_reads_list_file(self, reads_list):
         """
         stage_reads_list_file: download fastq file associated to reads to scratch area
@@ -50,25 +51,30 @@ class MetabolicUtil():
         return (fastq_forward, fastq_reverse)
 
 
-    def prepare_input_read_files(self, params):
+    def make_metabolic_reads_file_input(self):
+        """
+            This function runs the selected read mapper and creates the
+            sorted and indexed bam files from sam files using samtools.
+        """
 
         reads_list = task_params['reads_list']
 
         (read_scratch_path, read_type) = self.stage_reads_list_file(reads_list)
 
-        # list of reads files, can be 1 or more. assuming reads are either type unpaired or interleaved
-        # will not handle unpaired forward and reverse reads input as seperate (non-interleaved) files
+        omic_reads_parameter_file = os.path.abspath(self.shared_folder) + 'omic_reads_parameter_file.txt'
+        with open(omic_reads_parameter_file, 'w+') as f:
 
-        for i in range(len(read_scratch_path)):
-            fastq = read_scratch_path[i]
-            fastq_type = read_type[i]
+            for i in range(len(read_scratch_path)):
+                fastq = read_scratch_path[i]
+                fastq_type = read_type[i]
 
-            if fastq_type == 'interleaved':  # make sure working - needs tests
-                log("Running interleaved read mapping mode")
-                self.run_read_mapping_interleaved_pairs_mode(task_params, assembly_clean, fastq, sam)
-            else:  # running read mapping in single-end mode
-                log("Running unpaired read mapping mode")
-                self.run_read_mapping_unpaired_mode(task_params, assembly_clean, fastq, sam)
+                if fastq_type == 'interleaved':  # make sure working - needs tests
+                    log("Running interleaved read mapping mode")
+                    (fastq_forward, fastq_reverse) = deinterlace_raw_reads(fastq)
+                    f.write(fastq_forward + ',' + fastq_reverse)
+                else:  # running read mapping in single-end mode
+                    log("Running unpaired read mapping mode")
+                    f.write(fastq)
 
 
 
