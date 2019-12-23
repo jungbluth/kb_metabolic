@@ -80,15 +80,15 @@ def create_html_report(callback_url, scratch, workspace_name):
     dfu = DataFileUtil(callback_url)
     report_name = 'METABOLIC_report_' + str(uuid.uuid4())
     report = KBaseReport(callback_url)
-    copyfile(os.path.join(os.path.dirname(__file__), 'index.html'),
-             os.path.join(output_dir, 'index.html'))
+    copyfile(os.path.join(os.path.dirname(__file__), 'report_template.html'),
+             os.path.join(output_dir, 'report_template.html'))
 
     report_shock_id = dfu.file_to_shock({'file_path': output_dir,
                                         'pack': 'zip'})['shock_id']
 
     html_file = {'shock_id': report_shock_id,
-                 'name': 'index.html',
-                 'label': 'index.html',
+                 'name': 'report_template.html',
+                 'label': 'report_template.html',
                  'description': 'HTML report for METABOLIC'
                  }
 
