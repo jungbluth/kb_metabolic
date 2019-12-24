@@ -92,7 +92,13 @@ class kb_metabolic:
         metabolic = MetabolicUtil(self.config, self.callback_url, workspace_id, self.cpus)
 
         print('\n\nreads_list is: {}'.format(params.get('reads_list')))
-        results = metabolic.run_metabolic_without_reads(params)
+        if params.get('reads_list') is None:
+          #results = metabolic.run_metabolic_without_reads(params)
+          print("None")
+        else:
+          print("NotNone")
+          results = metabolic.run_metabolic_with_reads(params)
+
         logging.info(results)
         output = create_html_report(self.callback_url, self.shared_folder, params['workspace_name'])
 
@@ -104,6 +110,7 @@ class kb_metabolic:
                              'output is not type dict as required.')
         # return the results
         return [output]
+
     def status(self, ctx):
         #BEGIN_STATUS
         returnVal = {'state': "OK",

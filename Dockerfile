@@ -54,6 +54,8 @@ COPY ./ /kb/module
 RUN mkdir -p /kb/module/work
 RUN chmod -R a+rw /kb/module
 
+ENV PATH=/kb/module/lib/kb_metabolic/bin/bbmap:$PATH
+
 WORKDIR /kb/module
 
 RUN make all

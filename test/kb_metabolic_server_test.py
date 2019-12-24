@@ -66,6 +66,7 @@ class kb_metabolicTest(unittest.TestCase):
         print("START TEST 1\n")
         ret = self.serviceImpl.run_kb_metabolic(self.ctx, {'workspace_name': self.wsName,
                                                              'inputObjectRef': '30870/32/3',
-                                                             # 'reads_list' : ['30870/211/1'],
+                                                            #  'reads_list' : ['30870/211/1'], # single end
+                                                             'reads_list' : ['30870/213/1'], # interleaved
                                                              'kegg_module_cutoff': '0.75',
                                                              'prodigal_method': 'meta'})
