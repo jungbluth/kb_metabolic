@@ -4,7 +4,6 @@ import logging
 
 from installed_clients.ReadsUtilsClient import ReadsUtils
 
-
 class MetabolicUtil():
     '''
     Utilities for running METABOLIC
@@ -128,8 +127,6 @@ class MetabolicUtil():
         '''
         Run the METABOLIC-C workflow (using raw reads)
         '''
-
-
         out_dir = os.path.join(self.shared_folder, "output")
         omic_reads_parameter_file = self.make_metabolic_reads_file_input(params)
         metabolic_cmd = " ".join(["perl", "/kb/module/bin/METABOLIC/METABOLIC-C.pl",

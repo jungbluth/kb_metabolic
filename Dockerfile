@@ -9,7 +9,7 @@ MAINTAINER Sean Jungbluth <sjungbluth@lbl.gov>
 WORKDIR /kb/module/bin
 
 # To install all the dependencies
-RUN apt-get update && apt-get install -y wget tzdata git r-base gcc automake libtool libc6-dev libssl-dev curl libcurl4-openssl-dev
+RUN apt-get update && apt-get install -y wget tzdata git r-base gcc automake libtool libc6-dev libssl-dev curl libcurl4-openssl-dev bowtie2
 
 # install perl and packages
 RUN conda install -c bioconda perl-bioperl
@@ -55,6 +55,7 @@ RUN mkdir -p /kb/module/work
 RUN chmod -R a+rw /kb/module
 
 ENV PATH=/kb/module/lib/kb_metabolic/bin/bbmap:$PATH
+ENV PATH=/kb/module/lib/kb_metabolic/bin/samtools/bin:$PATH
 
 WORKDIR /kb/module
 

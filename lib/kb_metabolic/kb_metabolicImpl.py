@@ -9,6 +9,10 @@ from kb_metabolic.utils.misc_utils import create_html_report
 
 from kb_metabolic.utils.MetabolicUtil import MetabolicUtil
 
+from installed_clients.kb_gtdbtkClient import kb_gtdbtk
+from installed_clients.baseclient import ServerError
+
+
 #END_HEADER
 
 
@@ -49,6 +53,7 @@ class kb_metabolic:
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
         self.callback_url = os.environ['SDK_CALLBACK_URL']
+        print("\n\nconfig is {}".format(config))
         self.shared_folder = config['scratch']
         self.config = config
         self.config['callback_url'] = self.callback_url
@@ -87,6 +92,23 @@ class kb_metabolic:
 
         logging.info("Rename Genome File Suffixes\n")
         rename_input_file_suffixes(self.shared_folder)
+
+
+        print('\n\n\n {}'.format(os.path.abspath(self.shared_folder)))
+        os.makedirs(os.path.abspath(self.shared_folder) + '/output')
+        #
+        # print('Running GTDBtk')
+        # gtdbtk = kb_gtdbtk(self.callback_url)
+        # try:
+        #     gtdbtkret = gtdbtk.run_kb_gtdbtk({'inputObjectRef': '30870/32/3'})
+        #
+        # except ServerError as gtdbtke:
+        #     # not really any way to test this, all inputs have been checked earlier and should be
+        #     # ok
+        #     print('Logging exception from running GTDBtk')
+        #     print(str(gtdbtke))
+        #     # TODO delete shock node
+        #     raise
 
         logging.info("Run METABOLIC\n")
         metabolic = MetabolicUtil(self.config, self.callback_url, workspace_id, self.cpus)

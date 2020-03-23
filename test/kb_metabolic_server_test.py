@@ -9,6 +9,7 @@ from kb_metabolic.kb_metabolicServer import MethodContext
 from kb_metabolic.authclient import KBaseAuth as _KBaseAuth
 
 from installed_clients.WorkspaceClient import Workspace
+from installed_clients.kb_gtdbtkClient import kb_gtdbtk
 
 
 class kb_metabolicTest(unittest.TestCase):
@@ -42,6 +43,7 @@ class kb_metabolicTest(unittest.TestCase):
         cls.serviceImpl = kb_metabolic(cls.cfg)
         cls.scratch = cls.cfg['scratch']
         cls.callback_url = os.environ['SDK_CALLBACK_URL']
+        cls.kb_gtdbtk = kb_gtdbtk(os.environ['SDK_CALLBACK_URL'], token=token)
         suffix = int(time.time() * 1000)
         cls.wsName = "test_ContigFilter_" + str(suffix)
         ret = cls.wsClient.create_workspace({'workspace': cls.wsName})  # noqa
@@ -52,21 +54,19 @@ class kb_metabolicTest(unittest.TestCase):
             cls.wsClient.delete_workspace({'workspace': cls.wsName})
             print('Test workspace was deleted')
 
-    # NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
+    #NOTE: According to Python unittest naming rules test method names should start from 'test'. # noqa
     def test_kb_metabolic(self):
-        # Prepare test objects in workspace if needed using
-        # self.getWsClient().save_objects({'workspace': self.getWsName(),
-        #                                  'objects': []})
-        #
-        # Run your method by
-        # ret = self.getImpl().your_method(self.getContext(), parameters...)
-        #
-        # Check returned data with
-        # self.assertEqual(ret[...], ...) or other unittest methods
-        print("START TEST 1\n")
+        print("START test_kb_metabolic\n")
         ret = self.serviceImpl.run_kb_metabolic(self.ctx, {'workspace_name': self.wsName,
                                                              'inputObjectRef': '30870/32/3',
                                                             #  'reads_list' : ['30870/211/1'], # single end
                                                              'reads_list' : ['30870/213/1'], # interleaved
                                                              'kegg_module_cutoff': '0.75',
                                                              'prodigal_method': 'meta'})
+    #
+    # def test_kb_gtdbtk(self):
+    #     print("START test_kb_gtdbtk\n")
+    #     # ret = self.run_kb_gtdbtk(self.ctx, {'workspace_name': self.wsName,
+    #     #                                                 'inputObjectRef': '30870/32/3'})
+    #     self.kb_gtdbtk.run_kb_gtdbtk(self.ctx, {'workspace_name': self.wsName,
+    #                                                     'inputObjectRef': '30870/32/3'})

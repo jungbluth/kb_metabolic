@@ -132,6 +132,12 @@ publications:
         link: https://www.ncbi.nlm.nih.gov/pubmed/25402007
 
     -
+        pmid: 22388286
+        display-text: |
+            Langmead B, Salzberg SL. Fast gapped-read alignment with Bowtie 2. Nature Methods. 2012;9: 357-359. doi:10.1038/nmeth.1923
+        link: https://www.ncbi.nlm.nih.gov/pubmed/22388286
+
+    -
         display-text: |
             BamTools:
         link: https://github.com/pezmaster31/bamtools
